@@ -15,7 +15,8 @@ module Qa::Authorities
         @response = nil
         return
       end
-      q += '*'
+
+      q = URI.escape(q) + "*"
       authority_fragment = sub_authorityURL(sub_authority)
       query_url =  "http://id.loc.gov/search/?q=#{q}&q=#{authority_fragment}&format=json"
       @raw_response = get_json(query_url)
