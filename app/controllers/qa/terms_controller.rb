@@ -21,9 +21,6 @@ class Qa::TermsController < ApplicationController
   end
 
   def search
-    #convert wildcard to be URI encoded
-    params[:q].gsub!("*", "%2A")
-
     #initialize the authority and run the search. if there's a sub-authority and it's valid, include that param
     @authority = authority_class.constantize.new
     @authority.search(params[:q], params[:sub_authority])
