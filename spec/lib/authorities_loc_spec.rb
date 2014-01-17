@@ -67,4 +67,25 @@ describe Qa::Authorities::Loc do
  
   end
 
+  describe "#parse_authority_response" do
+    before(:each) do
+      @results = @authority.parse_authority_response(@authority.raw_response)
+    end
+
+    it "should return an array of results" do
+      expect(@results).not_to be_empty
+    end
+
+    it "should have the expected id/label pairs" do
+      expect(@results.length).to eq(2)
+      expect(@results[0]).to eq({
+        "id"=>"info:lc/authorities/names/n2008008718",
+        "label"=>"Haw, Lily, 1890?-1915"
+      })
+      expect(@results[1]).to eq({
+        "id"=>"info:lc/vocabulary/geographicAreas/n-us-hi",
+        "label"=>"Hawaii"
+      })
+    end
+  end
 end
